@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jumping Jack Exercise</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+border-radius:20px;
+            width: 100%;
+            max-width: 360px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header img {
+            width: 100%;
+            height: auto;
+        }
+        .description {
+            margin-bottom: 20px;
+        }
+        .how-to-do-it {
+            margin-bottom: 20px;
+        }
+        .how-to-do-it h3 {
+            margin-bottom: 10px;
+        }
+        .how-to-do-it ol {
+            padding-left: 20px;
+        }
+        .custom-repetitions {
+            margin-bottom: 20px;
+        }
+        .custom-repetitions input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .save-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="jumping jack.jpg" alt="Jumping Jack">
+            <h2>Jumping Jack</h2>
+            <p id="calories-burn">Easy | 390 Calories Burn</p>
+        </div>
+        <div class="description">
+            <h3>Descriptions</h3>
+            <p>A jumping jack, also known as a star jump and called a side straddle hop in the US military, is a physical jumping exercise performed by jumping to a position with the legs spread wide and the hands touching above the head.</p>
+        </div>
+        <div class="how-to-do-it">
+            <h3>How To Do It</h3>
+            <ol>
+                <li>Spread Your Arms: To make the gestures feel more relaxed, stretch your arms as you start this movement. The bending of hands is not necessary.</li>
+                <li>Rest at The Toe: The basis of this movement is jumping. Now, what needs to be considered is that you have to use the tips of your feet.</li>
+                <li>Adjust Foot Movement: Jumping jack is not just an ordinary jump, but you also have to pay close attention to leg movements.</li>
+                <li>Clapping Both Hands: This cannot be taken lightly. You see, without realizing it, the clapping of your hands helps you to keep your rhythm while doing the jumping jack.</li>
+            </ol>
+        </div>
+        <div class="custom-repetitions">
+            <h3>Custom Repetitions</h3>
+            <label for="repetitions">Number of Times:</label>
+            <input type="number" id="repetitions" value="30">
+            <label for="calories">Calories Burned:</label>
+            <input type="number" id="calories" value="130">
+        </div>
+        <button class="save-button" onclick="saveSettings()">Save</button>
+		<div style="text-align: center; margin-top: 20px;">
+            <!-- Back Button -->
+            <a href="15.html" style="margin-right: 20px;">Back</a>
+            <!-- Next Button -->
+            <a href="19.html" style="margin-left: 20px;">Next</a>
+        </div>  
+    </div>
+    <script>
+        function saveSettings() {
+            const repetitions = document.getElementById('repetitions').value;
+            const calories = document.getElementById('calories').value;
+            document.getElementById('calories-burn').innerText = `Easy | ${calories} Calories Burn`;
+            alert(`Saved: ${repetitions} repetitions and ${calories} calories burned`);
+        }
+    </script>
+</body>
+</html>

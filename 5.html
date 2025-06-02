@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Alarm</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.3.4/vue.global.prod.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            border-radius: 20px;
+            padding: 20px;
+            width: 360px;
+            height: 690px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .back-button, .options-button, .next-button {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        h1 {
+            font-size: 20px;
+            margin: 0;
+        }
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+            cursor: pointer;
+        }
+        .row:last-child {
+            border-bottom: none;
+        }
+        .label {
+            font-weight: bold;
+        }
+        .value {
+            color: #888;
+        }
+        .toggle {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #a881af;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        .add-button {
+            background-color: #7f9cf5;
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 300px;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .modal-body {
+            margin-bottom: 20px;
+        }
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .modal-button {
+            background-color: #7f9cf5;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="time"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        /* Add Next Button Style */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="container">
+        <div class="header">
+            <button class="back-button" @click="goBack">&lt;</button>
+            <h1>Add Alarm</h1>
+            <button class="options-button">...</button>
+        </div>
+        <div class="row" @click="openModal('bedtime')">
+            <span class="label">Bedtime</span>
+            <span class="value">{{ bedtime }}</span>
+        </div>
+        <div class="row" @click="openModal('hoursOfSleep')">
+            <span class="label">Hours of sleep</span>
+            <span class="value">{{ hoursOfSleep }}</span>
+        </div>
+        <div class="row" @click="openModal('repeat')">
+            <span class="label">Repeat</span>
+            <span class="value">{{ repeatDisplay }}</span>
+        </div>
+        <div class="row">
+            <span class="label">Vibrate When Alarm Sound</span>
+            <label class="toggle">
+                <input type="checkbox" v-model="vibrate">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <button class="add-button" @click="addAlarm">Add</button>
+
+        <!-- Footer for Back and Next buttons -->
+        <div class="footer">
+            <button class="back-button" @click="goBack">Back</button>
+            <button class="next-button" @click="goNext">Next</button>
+        </div>
+
+        <!-- Bedtime Modal -->
+        <div v-if="activeModal === 'bedtime'" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Set Bedtime</h2>
+                    <button class="modal-close" @click="closeModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <input type="time" v-model="tempBedtime">
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-button" @click="saveBedtime">Save</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hours of Sleep Modal -->
+        <div v-if="activeModal === 'hoursOfSleep'" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Set Hours of Sleep</h2>
+                    <button class="modal-close" @click="closeModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <input type="number" v-model="tempHours" placeholder="Hours">
+                    <input type="number" v-model="tempMinutes" placeholder="Minutes">
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-button" @click="saveHoursOfSleep">Save</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Repeat Modal -->
+        <div v-if="activeModal === 'repeat'" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Set Repeat Days</h2>
+                    <button class="modal-close" @click="closeModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="checkbox-group">
+                        <label v-for="day in days" :key="day">
+                            <input type="checkbox" v-model="tempRepeat" :value="day">
+                            {{ day }}
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-button" @click="saveRepeat">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp, ref, computed } = Vue;
+
+        createApp({
+            setup() {
+                const bedtime = ref('00:00 AM');
+                const hoursOfSleep = ref('0hours 00minutes');
+                const repeat = ref(['Mon', 'Tue', 'Wed', 'Thu', 'Fri']);
+                const vibrate = ref(true);
+                const activeModal = ref(null);
+                const tempBedtime = ref(bedtime.value);
+                const tempHours = ref(8);
+                const tempMinutes = ref(30);
+                const tempRepeat = ref([...repeat.value]);
+
+                const days = ref(['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']);
+
+                const repeatDisplay = computed(() => {
+                    if (repeat.value.length === 7) return 'Everyday';
+                    if (repeat.value.length === 0) return 'Never';
+                    return repeat.value.join(', ');
+                });
+
+                const openModal = (type) => {
+                    activeModal.value = type;
+                };
+
+                const closeModal = () => {
+                    activeModal.value = null;
+                };
+
+                const saveBedtime = () => {
+                    bedtime.value = tempBedtime.value;
+                    closeModal();
+                };
+
+                const saveHoursOfSleep = () => {
+                    hoursOfSleep.value = `${tempHours.value}hours ${tempMinutes.value}minutes`;
+                    closeModal();
+                };
+
+                const saveRepeat = () => {
+                    repeat.value = [...tempRepeat.value];
+                    closeModal();
+                };
+
+                const addAlarm = () => {
+                    alert('Alarm Added');
+                };
+
+                const goBack = () => {
+                    window.location.href = '3.html';
+                };
+
+                const goNext = () => {
+                    window.location.href = '6.html';
+                };
+
+                return {
+                    bedtime,
+                    hoursOfSleep,
+                    repeat,
+                    vibrate,
+                    activeModal,
+                    tempBedtime,
+                    tempHours,
+                    tempMinutes,
+                    tempRepeat,
+                    days,
+                    repeatDisplay,
+                    openModal,
+                    closeModal,
+                    saveBedtime,
+                    saveHoursOfSleep,
+                    saveRepeat,
+                    addAlarm,
+                    goBack,
+                    goNext
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

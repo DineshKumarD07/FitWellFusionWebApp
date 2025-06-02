@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eat Well</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 360px;
+            height: 690px;
+            background: linear-gradient(to top right, #d9e7ff, #a8c1ff);
+            border-radius: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            width: 150px;
+            height: 150px;
+            background-color: #e0e0e0;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .logo img {
+            width: 180px;
+            height: 180px;
+        }
+
+        .content h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .content p {
+            font-size: 16px;
+            text-align: center;
+            margin-top: 10px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .button {
+            margin-top: 40px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #e0e0ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .button img {
+            width: 30px;
+            height: 30px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Default logo -->
+        <div class="logo">
+            <img src="eat well.ico" alt="Eatwell">
+        </div>
+
+        <div class="content">
+            <h1>Eat Well</h1>
+            <p>Let's start a healthy lifestyle with us, we can determine your diet every day. Healthy eating is fun.</p>
+        </div>
+
+        <style>
+            .button {
+                cursor: pointer; /* Makes the div look like a button */
+            }
+        </style>
+    </head>
+    <body>
+	<div style="text-align: center; margin-top: 20px;">
+            <!-- Back Button -->
+            <a href="11.html" style="margin-right: 20px;">Back</a>
+            <!-- Next Button -->
+            <a href="13.html" style="margin-left: 20px;">Next</a>
+        </div> 
+        <div class="button" onclick="nextFunction()">
+            <img src="right-arrow.ico" alt="Next Icon"> 
+        </div>
+    
+        <script>
+            function nextFunction() {
+                // Add your functionality here
+                console.log("Next button clicked!"); // Example action
+                // window.location.href = 'next-page.html'; // Example of redirecting to another page
+            }
+        </script>
+    </div>
+</body>
+</html>

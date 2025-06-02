@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile App Layout</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 100%;
+            max-width: 360px;
+            height: 100vh;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background: #007bff;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .content img {
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto;
+            display: block;
+        }
+        .description {
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        .button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            What is your goal?
+        </div>
+        <div class="content">
+            <img src="fitness goal 2.ico" alt="Default Image">
+            <div class="description">
+                Lean & Tone<br>
+                I'm "skinny fat".look thin but have "no shape". I want to learn my muscle in the right way.
+            </div>
+            <button class="button">Confirm</button>
+			<div style="text-align: center; margin-top: 20px;">
+            <!-- Back Button -->
+            <a href="28.html" style="margin-right: 20px;">Back</a>
+            <!-- Next Button -->
+            <a href="30.html" style="margin-left: 20px;">Next</a>
+        </div>  
+        </div>
+    </div>
+</body>
+</html>

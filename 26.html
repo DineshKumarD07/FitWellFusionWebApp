@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Burn - Fitness App</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 375px;
+            height: 100%;
+            margin: auto;
+            background-color: #e6f2ff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .image-container img {
+            width: 80%;
+            max-width: 300px;
+            height: auto;
+        }
+        .text-container {
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .next-button {
+            background-color: #4a90e2;
+            border: none;
+            border-radius: 50%;
+            width: 60px; /* Adjusted for better fit */
+            height: 60px; /* Adjusted for better fit */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            align-self: flex-end;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+        .next-button img {
+            width: 30px; /* Icon size */
+            height: 30px; /* Icon size */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img src="burn.ico" alt="Runner illustration">
+        </div>
+        <div class="text-container">
+            <h1>Get Burn</h1>
+            <p>Let's keep burning to achieve your goals. It hurts only temporarily; if you give up now, you will be in pain forever.</p>
+        </div>
+        <button class="next-button" onclick="nextFunction()">
+            <img src="right-arrow.ico" alt="Next Icon"> <!-- New icon added -->
+        </button>
+		<div style="text-align: center; margin-top: 20px;">
+            <!-- Back Button -->
+            <a href="22.html" style="margin-right: 20px;">Back</a>
+            <!-- Next Button -->
+            <a href="28.html" style="margin-left: 20px;">Next</a>
+        </div>  
+    </div>
+
+    <script>
+        function nextFunction() {
+            console.log("Next button clicked!"); // Example action
+            // window.location.href = 'next-page.html'; // Example of redirecting to another page
+        }
+    </script>
+</body>
+</html>

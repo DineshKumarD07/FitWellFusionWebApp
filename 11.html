@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Lose a Fat Program</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+height:100vh;
+        }
+        .container {
+            max-width: 360px;
+
+
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .profile-info {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+        }
+        .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            margin-right: 15px;
+        }
+        .user-details {
+            flex-grow: 1;
+        }
+        .edit-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .stat {
+            text-align: center;
+        }
+        .menu-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            background-color: #f8f9fa;
+        }
+        .nav-item {
+            text-align: center;
+            color: #6c757d;
+        }
+        .nav-item.active {
+            color: #007bff;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <span>&lt;</span>
+            <h2>Profile</h2>
+            <span>...</span>
+        </div>
+        <div class="profile-info">
+            <div class="avatar-container">
+                <div class="avatar-frame"></div> <!-- Frame -->
+                <img src="profile.ico" alt="Profile Picture" class="avatar">
+            </div>
+            <div class="user-details">
+                <h3>Stefani Wong</h3>
+                <p>Lose a Fat Program</p>
+            </div>
+            <button class="edit-btn" onclick="editProfile()">Edit</button>
+        </div>
+        <div class="stats">
+            <div class="stat">
+                <strong id="height">180cm</strong>
+                <p>Height</p>
+            </div>
+            <div class="stat">
+                <strong id="weight">65kg</strong>
+                <p>Weight</p>
+            </div>
+            <div class="stat">
+                <strong id="age">22yo</strong>
+                <p>Age</p>
+            </div>
+        </div>
+        <div>
+            <h3 style="padding-left: 15px;">Account</h3>
+            <div class="menu-item" onclick="showPersonalData()">
+                Personal Data
+                <span>&gt;</span>
+            </div>
+            <div class="menu-item" onclick="showAchievements()">
+                Achievement
+                <span>&gt;</span>
+            </div>
+            <div class="menu-item" onclick="showActivityHistory()">
+                Activity History
+                <span>&gt;</span>
+            </div>
+            <div class="menu-item" onclick="showWorkoutProgress()">
+                Workout Progress
+                <span>&gt;</span>
+            </div>
+        </div>
+        <div>
+            <h3 style="padding-left: 15px;">Notification</h3>
+            <div class="menu-item">
+                Pop-up Notification
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+        <div>
+            <h3 style="padding-left: 15px;">Other</h3>
+            <div class="menu-item" onclick="showContactUs()">
+                Contact Us
+                <span>&gt;</span>
+            </div>
+            <div class="menu-item" onclick="showPrivacyPolicy()">
+                Privacy Policy
+                <span>&gt;</span>
+            </div>
+            <div class="menu-item" onclick="showSettings()">
+                Settings
+                <span>&gt;</span>
+            </div>
+        </div>
+        <div class="bottom-nav">
+            <div class="nav-item">
+                <div>🏠</div>
+                <small>Home</small>
+            </div>
+            <div class="nav-item">
+                <div>📊</div>
+                <small>Stats</small>
+            </div>
+            <div class="nav-item active">
+                <div>⚙️</div>
+                <small>Profile</small>
+            </div>
+        </div>
+    </div>
+
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Edit Profile</h2>
+            <p>Height: <input type="number" id="editHeight" min="0" max="300"> cm</p>
+            <p>Weight: <input type="number" id="editWeight" min="0" max="500"> kg</p>
+            <p>Age: <input type="number" id="editAge" min="0" max="120"> years</p>
+            <button onclick="saveProfile()">Save Changes</button>
+        </div>
+    </div>
+
+    <div id="personalDataModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Personal Data</h2>
+            <p><strong>Name:</strong> Stefani Wong</p>
+            <p><strong>Email:</strong> stefani.wong@example.com</p>
+            <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+            <p><strong>Address:</strong> 123 Fitness Street, Healthy City, CA 90210</p>
+            <p><strong>Emergency Contact:</strong> John Wong (Brother) - +1 (555) 987-6543</p>
+            <p><strong>Blood Type:</strong> A+</p>
+            <p><strong>Allergies:</strong> None</p>
+            <p><strong>Medical Conditions:</strong> None</p>
+        </div>
+    </div>
+
+    <div id="achievementsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Achievements</h2>
+            <p><strong>Completed Workouts:</strong> 150</p>
+            <p><strong>Weight Loss:</strong> 10 kg</p>
+            <p><strong>Streaks:</strong> 30 days</p>
+            <p><strong>Badges:</strong></p>
+            <ul>
+                <li>Workout Warrior</li>
+                <li>Healthy Eating</li>
+                <li>Consistency Champion</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="activityHistoryModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Activity History</h2>
+            <p><strong>Date:</strong> 2023-10-01</p>
+            <p><strong>Activity:</strong> Running</p>
+            <p><strong>Duration:</strong> 30 minutes</p>
+            <p><strong>Calories Burned:</strong> 300</p>
+            <p><strong>Date:</strong> 2023-10-02</p>
+            <p><strong>Activity:</strong> Yoga</p>
+            <p><strong>Duration:</strong> 45 minutes</p>
+            <p><strong>Calories Burned:</strong> 250</p>
+        </div>
+    </div>
+
+    <div id="workoutProgressModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Workout Progress</h2>
+            <p><strong>Current Workout Plan:</strong> Strength Training</p>
+            <p><strong>Progress:</strong> 50%</p>
+            <p><strong>Next Goal:</strong> Increase strength by 10%</p>
+            <p><strong>Notes:</strong></p>
+            <ul>
+                <li>Focus on form during exercises</li>
+                <li>Increase weights gradually</li>
+                <li>Rest for at least 1 minute between sets</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="contactUsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Contact Us</h2>
+            <p><strong>Customer Support:</strong> support@loseafat.com</p>
+            <p><strong>Phone:</strong> +1 (800) 555-1234</p>
+            <p><strong>Hours:</strong> Monday - Friday, 9:00 AM - 5:00 PM EST</p>
+            <p><strong>Address:</strong> 456 Wellness Ave, Fitville, NY 10001</p>
+            <p><strong>Social Media:</strong></p>
+            <ul>
+                <li>Facebook: @LoseAFatProgram</li>
+                <li>Instagram: @lose_a_fat</li>
+                <li>Twitter: @LoseAFat</li>
+            </ul>
+            <p><strong>For Emergencies:</strong> If you're experiencing a medical emergency, please call your local emergency services immediately.</p>
+        </div>
+    </div>
+
+    <div id="privacyPolicyModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Privacy Policy</h2>
+            <p>Your privacy is important to us. We collect and use your personal information to provide and improve our services. We do not share your personal information with third parties except as described in our Privacy Policy.</p>
+            <p>For more details, please refer to our <a href="privacy-policy.html" target="_blank">Privacy Policy</a>.</p>
+        </div>
+    </div>
+
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Settings</h2>
+            <p><strong>Language:</strong> English</p>
+            <p><strong>Units:</strong> Metric</p>
+            <p><strong>Notifications:</strong></p>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+            </label>
+            <p><strong>Theme:</strong></p>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+            </label>
+<div style="text-align: center; margin-top: 20px;">
+            <!-- Back Button -->
+            <a href="10.html" style="margin-right: 20px;">Back</a>
+            <!-- Next Button -->
+            <a href="12.html" style="margin-left: 20px;">Next</a>
+        </div> 
+        </div>
+    </div>
+
+    <script>
+        var editModal = document.getElementById("editModal");
+        var personalDataModal = document.getElementById("personalDataModal");
+        var achievementsModal = document.getElementById("achievementsModal");
+        var activityHistoryModal = document.getElementById("activityHistoryModal");
+        var workoutProgressModal = document.getElementById("workoutProgressModal");
+        var contactUsModal = document.getElementById("contactUsModal");
+        var privacyPolicyModal = document.getElementById("privacyPolicyModal");
+        var settingsModal = document.getElementById("settingsModal");
+        var spans = document.getElementsByClassName("close");
+
+        function editProfile() {
+            document.getElementById("editHeight").value = parseInt(document.getElementById("height").innerText);
+            document.getElementById("editWeight").value = parseInt(document.getElementById("weight").innerText);
+            document.getElementById("editAge").value = parseInt(document.getElementById("age").innerText);
+            editModal.style.display = "block";
+        }
+
+        function saveProfile() {
+            var newHeight = document.getElementById("editHeight").value;
+            var newWeight = document.getElementById("editWeight").value;
+            var newAge = document.getElementById("editAge").value;
+
+            document.getElementById("height").innerText = newHeight + "cm";
+            document.getElementById("weight").innerText = newWeight + "kg";
+            document.getElementById("age").innerText = newAge + "yo";
+
+            editModal.style.display = "none";
+        }
+
+        function showPersonalData() {
+            personalDataModal.style.display = "block";
+        }
+
+        function showAchievements() {
+            achievementsModal.style.display = "block";
+        }
+
+        function showActivityHistory() {
+            activityHistoryModal.style.display = "block";
+        }
+
+        function showWorkoutProgress() {
+            workoutProgressModal.style.display = "block";
+        }
+
+        function showContactUs() {
+            contactUsModal.style.display = "block";
+        }
+
+        function showPrivacyPolicy() {
+            privacyPolicyModal.style.display = "block";
+        }
+
+        function showSettings() {
+            settingsModal.style.display = "block";
+        }
+
+        for (var i = 0; i < spans.length; i++) {
+            spans[i].onclick = function() {
+                editModal.style.display = "none";
+                personalDataModal.style.display = "none";
+                achievementsModal.style.display = "none";
+                activityHistoryModal.style.display = "none";
+                workoutProgressModal.style.display = "none";
+                contactUsModal.style.display = "none";
+                privacyPolicyModal.style.display = "none";
+                settingsModal.style.display = "none";
+            }
+        }
+
+        window.onclick = function(event) {
+            if (event.target == editModal) {
+                editModal.style.display = "none";
+            }
+            if (event.target == personalDataModal) {
+                personalDataModal.style.display = "none";
+            }
+            if (event.target == achievementsModal) {
+                achievementsModal.style.display = "none";
+            }
+            if (event.target == activityHistoryModal) {
+                activityHistoryModal.style.display = "none";
+            }
+            if (event.target == workoutProgressModal) {
+                workoutProgressModal.style.display = "none";
+            }
+            if (event.target == contactUsModal) {
+                contactUsModal.style.display = "none";
+            }
+            if (event.target == privacyPolicyModal) {
+                privacyPolicyModal.style.display = "none";
+            }
+            if (event.target == settingsModal) {
+                settingsModal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
+

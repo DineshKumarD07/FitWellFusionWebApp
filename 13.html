@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleep Tracker</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: white;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+        .chart-container {
+            margin-bottom: 20px;
+        }
+        .sleep-info {
+            background-color: #e6effd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .sleep-info h2 {
+            font-size: 18px;
+            margin: 0 0 10px 0;
+        }
+        .sleep-info p {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+        .schedule-button {
+            background-color: #e6effd;
+            border: none;
+            color: #007aff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .today-schedule {
+            margin-top: 20px;
+        }
+        .schedule-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .schedule-item-left {
+            display: flex;
+            align-items: center;
+        }
+        .schedule-item-left img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+        .schedule-item-right {
+            display: flex;
+            align-items: center;
+        }
+        .toggle {
+            width: 50px;
+            height: 30px;
+            background-color: #ccc;
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .toggle.active {
+            background-color: #007aff;
+        }
+        .toggle::after {
+            content: '';
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            background-color: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: 0.3s;
+        }
+        .toggle.active::after {
+            left: calc(100% - 28px);
+        }
+        .time-input {
+            border: none;
+            background: none;
+            font-size: 16px;
+            width: 80px;
+            text-align: right;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <span>&#8592;</span>
+            <h1>Sleep Tracker</h1>
+            <span>⋮</span>
+        </div>
+        <div class="chart-container">
+            <canvas id="sleepChart"></canvas>
+        </div>
+        <div class="sleep-info">
+            <h2>Last Night Sleep</h2>
+            <p id="sleep-duration">8h 20m</p>
+        </div>
+        <button class="schedule-button" id="scheduleBtn">Daily Sleep Schedule</button>
+        <div class="today-schedule">
+            <h2>Today Schedule</h2>
+            <div class="schedule-item">
+                <div class="schedule-item-left">
+                    <span>Bedtime</span>
+                </div>
+                <div class="schedule-item-right">
+                    <input type="time" class="time-input" id="bedtime" value="21:00">
+                    <div class="toggle" id="bedtimeToggle"></div>
+                </div>
+            </div>
+            <div class="schedule-item">
+                <div class="schedule-item-left">
+                    <span>Alarm</span>
+                </div>
+                <div class="schedule-item-right">
+                    <input type="time" class="time-input" id="alarm" value="05:10">
+                    <div class="toggle" id="alarmToggle"></div>
+                </div>
+				<div style="text-align: center; margin-top: 20px;">
+            <!-- Back Button -->
+            <a href="12.html" style="margin-right: 20px;">Back</a>
+            <!-- Next Button -->
+            <a href="15.html" style="margin-left: 20px;">Next</a>
+        </div>  
+            </div>
+        </div>
+    </div>
+    <script>
+        // Chart for sleep pattern
+        const ctx = document.getElementById('sleepChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                datasets: [{
+                    data: [4, 5, 4, 6, 3, 7, 8],
+                    borderColor: '#007aff',
+                    backgroundColor: 'rgba(0, 122, 255, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 10,
+                        ticks: {
+                            stepSize: 2
+                        }
+                    }
+                }
+            }
+        });
+
+        // Function to toggle on-off state
+        function toggleOnOff(element) {
+            element.classList.toggle('active');
+        }
+
+        // Event listener for updating bedtime and alarm
+        document.getElementById('bedtime').addEventListener('input', function() {
+            console.log('Bedtime changed to:', this.value);
+        });
+
+        document.getElementById('alarm').addEventListener('input', function() {
+            console.log('Alarm changed to:', this.value);
+        });
+
+        // Event listeners for toggles
+        document.getElementById('bedtimeToggle').addEventListener('click', function() {
+            toggleOnOff(this);
+            const isActive = this.classList.contains('active');
+            console.log('Bedtime is', isActive ? 'on' : 'off');
+        });
+
+        document.getElementById('alarmToggle').addEventListener('click', function() {
+            toggleOnOff(this);
+            const isActive = this.classList.contains('active');
+            console.log('Alarm is', isActive ? 'on' : 'off');
+        });
+
+        // Event listener for schedule button
+        document.getElementById('scheduleBtn').addEventListener('click', function() {
+            alert('Daily Sleep Schedule clicked!');
+        });
+    </script>
+</body>
+</html>

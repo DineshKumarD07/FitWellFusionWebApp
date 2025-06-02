@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleep Schedule</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 375px;
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 20px;
+        }
+        .ideal-sleep {
+            background-color: #e6f2ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .ideal-sleep img {
+            width: 80px;  /* Set your desired size */
+            height: 80px; /* Set your desired size */
+        }
+        .calendar {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
+        .calendar-day {
+            text-align: center;
+        }
+        .calendar-day input[type="radio"] {
+            display: none;
+        }
+        .calendar-day label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+        .calendar-day input[type="radio"]:checked + label {
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            justify-content: center;
+        }
+        .schedule-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .toggle {
+            width: 50px;
+            height: 30px;
+            background-color: #ccc;
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+        }
+        .toggle.active {
+            background-color: #007bff;
+        }
+        .toggle::after {
+            content: '';
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            background-color: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: 0.3s;
+        }
+        .toggle.active::after {
+            left: 22px;
+        }
+        .sleep-duration {
+            background-color: #ffe6f2;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px;
+            position: relative;
+        }
+        .sleep-duration-bar {
+            height: 10px;
+            background-color: #ff80bf;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .plus-button {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            width: 40px;
+            height: 40px;
+            background-color: #ff80bf;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <span>&#8592;</span>
+            <h1>Sleep Schedule</h1>
+            <span>...</span>
+        </div>
+        <div class="ideal-sleep">
+            <div>
+                <h2>Ideal Hours for Sleep</h2>
+                <p>8 hours 30 minutes</p>
+                <button>Learn More</button>
+            </div>
+            <img src="Sleeping_Moon.ico" alt="Sleeping Moon"> <!-- Change the path if in a different folder -->
+        </div>
+        <h2 style="padding-left: 20px;">Your Schedule</h2>
+        <div class="calendar">
+            <div class="calendar-day">
+                <input type="radio" id="day1" name="day" value="Wed">
+                <label for="day1">
+                    <div>Wed</div>
+                    <div>12</div>
+                </label>
+            </div>
+            <div class="calendar-day">
+                <input type="radio" id="day2" name="day" value="Thu">
+                <label for="day2">
+                    <div>Thu</div>
+                    <div>13</div>
+                </label>
+            </div>
+            <div class="calendar-day">
+                <input type="radio" id="day3" name="day" value="Fri" checked>
+                <label for="day3">
+                    <div>Fri</div>
+                    <div>14</div>
+                </label>
+            </div>
+            <div class="calendar-day">
+                <input type="radio" id="day4" name="day" value="Sat">
+                <label for="day4">
+                    <div>Sat</div>
+                    <div>15</div>
+                </label>
+            </div>
+            <div class="calendar-day">
+                <input type="radio" id="day5" name="day" value="Sun">
+                <label for="day5">
+                    <div>Sun</div>
+                    <div>16</div>
+                </label>
+            </div>
+            
+        </div>
+        <div class="schedule-item">
+            <div>
+                <h3>Bedtime</h3>
+                <p>in <span id="bedtimeCountdown">6 hours 22 minutes</span></p>
+            </div>
+            <input type="time" id="bedtimeInput" value="21:00">
+            <div class="toggle" id="bedtimeToggle"></div>
+        </div>
+        <div class="schedule-item">
+            <div>
+                <h3>Alarm</h3>
+                <p>in <span id="alarmCountdown">14 hours 30 minutes</span></p>
+            </div>
+            <input type="time" id="alarmInput" value="05:10">
+            <div class="toggle" id="alarmToggle"></div>
+        </div>
+        <div class="sleep-duration">
+            <p>You will get <span id="sleepDuration">8 hours 10 minutes</span> for tonight</p>
+            <div class="sleep-duration-bar" id="sleepDurationBar"></div>
+            <div class="plus-button" id="plusButton">+</div>
+            <div style="text-align: center; margin-top: 20px;">
+                <!-- Back Button -->
+                <a href="6.html" style="margin-right: 20px;">Back</a>
+                <!-- Next Button -->
+                <a href="8.html" style="margin-left: 20px;">Next</a>
+            </div>  
+        </div>
+    </div>  
+    <script>
+        function updateCountdown(inputId, countdownId) {
+            const input = document.getElementById(inputId);
+            const countdown = document.getElementById(countdownId);
+            const now = new Date();
+            const [hours, minutes] = input.value.split(':');
+            const target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes);
+            if (target <= now) {
+                target.setDate(target.getDate() + 1);
+            }
+            const diff = target - now;
+            const hoursLeft = Math.floor(diff / 3600000);
+            const minutesLeft = Math.floor((diff % 3600000) / 60000);
+            countdown.textContent = `${hoursLeft} hours ${minutesLeft} minutes`;
+        }
+
+        function updateSleepDuration() {
+            const bedtimeInput = document.getElementById('bedtimeInput');
+            const alarmInput = document.getElementById('alarmInput');
+            const bedtimeToggle = document.getElementById('bedtimeToggle');
+            const alarmToggle = document.getElementById('alarmToggle');
+
+            if (!bedtimeToggle.classList.contains('active') || !alarmToggle.classList.contains('active')) {
+                document.getElementById('sleepDuration').textContent = 'N/A';
+                document.getElementById('sleepDurationBar').style.width = '0%';
+                return;
+            }
+
+            const [bedHours, bedMinutes] = bedtimeInput.value.split(':').map(Number);
+            const [alarmHours, alarmMinutes] = alarmInput.value.split(':').map(Number);
+            let duration = (alarmHours * 60 + alarmMinutes) - (bedHours * 60 + bedMinutes);
+            if (duration < 0) duration += 24 * 60;
+            const durationHours = Math.floor(duration / 60);
+            const durationMinutes = duration % 60;
+            document.getElementById('sleepDuration').textContent = `${durationHours} hours ${durationMinutes} minutes`;
+            document.getElementById('sleepDurationBar').style.width = `${(duration / (24 * 60)) * 100}%`;
+        }
+
+        document.getElementById('bedtimeInput').addEventListener('change', () => {
+            updateCountdown('bedtimeInput', 'bedtimeCountdown');
+            updateSleepDuration();
+        });
+
+        document.getElementById('alarmInput').addEventListener('change', () => {
+            updateCountdown('alarmInput', 'alarmCountdown');
+            updateSleepDuration();
+        });
+
+        document.getElementById('bedtimeToggle').addEventListener('click', function() {
+            this.classList.toggle('active');
+            updateSleepDuration();
+        });
+
+        document.getElementById('alarmToggle').addEventListener('click', function() {
+            this.classList.toggle('active');
+            updateSleepDuration();
+        });
+
+        document.getElementById('plusButton').addEventListener('click', updateSleepDuration);
+
+        // Initial updates
+        updateCountdown('bedtimeInput', 'bedtimeCountdown');
+        updateCountdown('alarmInput', 'alarmCountdown');
+        updateSleepDuration();
+
+        // Update countdowns every minute
+        setInterval(() => {
+            updateCountdown('bedtimeInput', 'bedtimeCountdown');
+            updateCountdown('alarmInput', 'alarmCountdown');
+        }, 60000);
+    </script>
+</body>
+</html>

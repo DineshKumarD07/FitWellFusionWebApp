@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Completion</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            width:360px;
+height:690px;
+            max-width: 100%;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .icon {
+            font-size: 80px;
+            color: #7f7f7f;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .input-group span {
+            display: inline-block;
+            width: 50px;
+            padding: 12px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            margin-left: -10px;
+            text-align: center;
+            color: #666;
+        }
+
+        .input-inline {
+            display: flex;
+        }
+
+        button {
+            background-color: #637DFF;
+            color: #fff;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #5068d1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Default icon -->
+        <div class="icon">🎯</div>
+
+        <h2>Let's complete your profile</h2>
+        <p>It will help us to know more about you!</p>
+
+        <form>
+            <div class="input-group">
+                <select name="gender" required>
+                    <option value="">Choose Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <input type="date" name="dob" placeholder="Date of Birth" required>
+            </div>
+
+            <div class="input-group input-inline">
+                <input type="number" name="weight" placeholder="Your Weight" required>
+                <span>KG</span>
+            </div>
+
+            <div class="input-group input-inline">
+                <input type="number" name="height" placeholder="Your Height" required>
+                <span>CM</span>
+            </div>
+
+            <button type="submit">Next</button>
+			<div style="text-align: center; margin-top: 20px;">
+            <!-- Back Button -->
+            <a href="16.html" style="margin-right: 20px;">Back</a>
+            <!-- Next Button -->
+            <a href="20.html" style="margin-left: 20px;">Next</a>
+        </div>  
+        </form>
+    </div>
+
+</body>
+</html>

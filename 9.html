@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Goal Selection</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+        .app-container {
+            width: 360px;
+            height: 690px;
+            background-color: white;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        p {
+            font-size: 14px;
+            color: #666;
+            margin-top: 0;
+        }
+        .goal-card {
+            background-color: #e6f2ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .goal-image {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            background-color: #ccc;
+            border-radius: 50%;
+        }
+        .goal-title {
+            font-size: 18px;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        .goal-description {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        .confirm-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .confirm-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <h1>What is your goal?</h1>
+        <p>It will help us to choose a best program for you</p>
+        <div class="goal-card">
+            <img src="fitbody.ico" alt="Fitness Body">
+            <div class="goal-title">Improve Shape</div>
+            <div class="goal-description">I have a low amount of body fat and I want to build more muscle</div>
+        </div>
+        <button class="confirm-button" onclick="confirmGoal()">Confirm</button>
+        <div style="text-align: center; margin-top: 20px;">
+            <!-- Back Button -->
+            <a href="8.html" style="margin-right: 20px;">Back</a>
+            <!-- Next Button -->
+            <a href="10.html" style="margin-left: 20px;">Next</a>
+        </div>  
+    </div>
+    <script>
+        function confirmGoal() {
+            alert("Goal confirmed! We'll design a program to help you improve your shape and build muscle.");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome, Stefani</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .mobile-screen {
+            width: 360px;
+            height: 729px;
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .button {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-screen">
+        <div class="image-container">
+            <img src="workout illustration.ico" alt="Workout Illustration">
+        </div>
+        <div>
+            <center><h1>Welcome, Stefani</h1></center>
+            <p>You are all set now, let's reach your goals together with us</p>
+        </div>
+        <button class="button">Go To Home</button>
+    </div>
+    <script>
+        document.querySelector('.button').addEventListener('click', function() {
+            window.location.href = '5.html';
+        });
+    </script>
+</body>
+</html>

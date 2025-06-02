@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Goal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 20px;
+            width: 360px;
+            height: 730px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            display: flex; /* Added for flexbox alignment */
+            flex-direction: column; /* Aligns children vertically */
+            justify-content: center; /* Centers content vertically */
+        }
+
+        .icon {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .icon img {
+            width: 150px;
+            height: 150px;
+        }
+
+        .text-content {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .text-content h1 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .text-content p {
+            font-size: 16px;
+            color: #777;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+
+        .next-button {
+            display: flex;
+            justify-content: center; /* Centers the button horizontally */
+            margin-top: auto; /* Pushes it to the bottom */
+            margin-bottom: 40px; /* Adds space at the bottom */
+        }
+
+        .button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #e0e0ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer; /* Makes the div look like a button */
+        }
+
+        .button img {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">
+            <img src="fitness goal.ico" alt="Default Icon">
+        </div>
+        <div class="text-content">
+            <h1>Track Your Goal</h1>
+            <p>Don't worry if you have trouble determining your goals, we can help you determine your goals and track your goals.</p>
+        </div>
+        <div class="next-button">
+            <div class="button" onclick="nextFunction()">
+                <img src="right-arrow.ico" alt="Next Icon">
+				<div style="text-align: center; margin-top: 20px;">
+            <!-- Back Button -->
+            <a href="20.html" style="margin-right: 20px;">Back</a>
+            <!-- Next Button -->
+            <a href="26.html" style="margin-left: 20px;">Next</a>
+        </div>  
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function nextFunction() {
+            // Add your functionality here
+            console.log("Next button clicked!"); // Example action
+            // window.location.href = 'next-page.html'; // Example of redirecting to another page
+        }
+    </script>
+</body>
+</html>
